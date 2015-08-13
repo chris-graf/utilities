@@ -23,7 +23,7 @@ class Pack
   attr_reader :picks
 
   DEFAULT_PICKS = [:rare] * 4 + [:common] * 26
-  UPGRADE_ODDS = 5
+  UPGRADE_ODDS = 10
 
   def initialize(picks = DEFAULT_PICKS)
     @picks = picks
@@ -81,17 +81,16 @@ end
 #   puts "legendary: #{pack.count(:legendary)}"
 #   puts "....."
 
-
-puts "__hero__   score | stdev "
+puts "__hero__  avg score | avg card sd | deck sd "
 CARD_RATINGS_BY_HERO.keys.each do |hero_class|
-  means = []
-  stdevs = []
+  score_means = []
+  score_stdevs = []
   10000.times do
     pack = Pack.new.seed_rarities
     draft = ArenaDrafter.new(CARD_RATINGS_BY_HERO)
     deck = draft.draft_deck(hero_class, pack)
-    means << deck.mean
-    stdevs << deck.standard_deviation
+    score_means << deck.mean
+    score_stdevs << deck.standard_deviation
   end
-  puts "#{hero_class}: #{" " * (8 - hero_class.length)} #{means.mean.round(2)} | #{stdevs.mean.round(2)} "
+  puts "#{hero_class}: #{" " * (8 - hero_class.length)} #{score_means.mean.round(1)}     |  #{score_stdevs.mean.round(1)}       |  #{score_means.standard_deviation.round(1)}"
 end
