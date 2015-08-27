@@ -18,7 +18,7 @@
 
 // Initial Code
 
-// const case_values = [1, 20, 300, 4000, 50000];
+// const caseValues = [1, 20, 300, 4000, 50000];
 
 // var cases = [];
 // var latestOffer;
@@ -60,7 +60,7 @@
 // }
 
 // var makeOffer = function() {
-//   sumOfClosedCases = case_values.reduce(
+//   sumOfClosedCases = caseValues.reduce(
 //     function(total, currentNumber){ return total + currentNumber }
 //     );
 //   casesLeft = cases.length;
@@ -111,7 +111,7 @@
 
 
 // // Construct array of cases and play game
-// case_values.forEach( function(caseValue){
+// caseValues.forEach( function(caseValue){
 //   cases.push(new Case(caseValue));
 // });
 
@@ -124,7 +124,7 @@
 
 const OFFER_MODIFIER = 0.8;
 
-var case_values = [];
+var caseValues = [];
 var closedCases = [];
 var openCases = [];
 var latestOffer;
@@ -137,7 +137,7 @@ var seedCases = function(numberOfCases, maxCaseValue) {
   for (var i = 0; i < numberOfCases; i ++) {
     dollarValueMinimum = dollarValueRangeIncrement * i;
     randomDollarValue = Math.floor(Math.random() * dollarValueRangeIncrement) + dollarValueMinimum + 1; // +1 to avoid $0 cases.
-    case_values.push(randomDollarValue);
+    caseValues.push(randomDollarValue);
   }
 }
 
@@ -209,7 +209,7 @@ var playGame = function() {
 // Construct array of cases and play game
 console.log("Welcome to... Let's Make a Case!")
 seedCases(5, 1000000);
-case_values.forEach( function(caseValue){
+caseValues.forEach( function(caseValue){
   closedCases.push(new Case(caseValue));
 });
 
